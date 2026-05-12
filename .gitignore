@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+coverage/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+terraform.tfvars
+terraform.tfvars.json
+
+# Local-only portfolio content
+website/src/data/profile.local.json
+website/src/data/projects.local.json
+website/public/media/personal/
+website/public/resume/*
+!website/public/resume/README.md
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local development workflow files
+AGENTS.md
+docs/PROJECT_STATUS.md
+notes/
+prompts/
+ai/
+scratch/
