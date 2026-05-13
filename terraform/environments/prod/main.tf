@@ -16,6 +16,7 @@ module "dns" {
   }
 
   domain_name             = var.domain_name
+  hosted_zone_id          = var.hosted_zone_id
   site_fqdn               = local.site_fqdn
   certificate_domain_name = local.site_fqdn
   tags                    = local.common_tags

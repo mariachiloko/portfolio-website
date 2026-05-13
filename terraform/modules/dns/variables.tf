@@ -3,6 +3,12 @@ variable "domain_name" {
   type        = string
 }
 
+variable "hosted_zone_id" {
+  description = "Optional existing hosted zone ID to use instead of creating a new zone."
+  type        = string
+  default     = null
+}
+
 variable "site_fqdn" {
   description = "Fully qualified domain name for the public site."
   type        = string

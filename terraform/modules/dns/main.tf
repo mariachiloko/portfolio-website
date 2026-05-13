@@ -2,9 +2,23 @@ locals {
   subject_alternative_names = var.certificate_domain_name == var.domain_name ? [] : [var.domain_name]
 }
 
+data "aws_route53_zone" "site" {
+  count        = var.hosted_zone_id == null ? 0 : 1
+  zone_id      = var.hosted_zone_id
+  private_zone = false
+}
+
 resource "aws_route53_zone" "site" {
+  count = var.hosted_zone_id == null ? 1 : 0
+
   name = var.domain_name
   tags = var.tags
+}
+
+locals {
+  hosted_zone_id   = var.hosted_zone_id == null ? aws_route53_zone.site[0].zone_id : data.aws_route53_zone.site[0].zone_id
+  hosted_zone_name = var.hosted_zone_id == null ? aws_route53_zone.site[0].name : data.aws_route53_zone.site[0].name
+  name_servers     = var.hosted_zone_id == null ? aws_route53_zone.site[0].name_servers : data.aws_route53_zone.site[0].name_servers
 }
 
 resource "aws_acm_certificate" "site" {
@@ -24,7 +38,7 @@ resource "aws_route53_record" "certificate_validation" {
     }
   }
 
-  zone_id         = aws_route53_zone.site.zone_id
+  zone_id         = local.hosted_zone_id
   name            = each.value.name
   type            = each.value.type
   ttl             = 300

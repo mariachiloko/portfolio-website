@@ -22,6 +22,12 @@ variable "domain_name" {
   default     = "example.com"
 }
 
+variable "hosted_zone_id" {
+  description = "Existing Route 53 hosted zone ID for the domain, if the zone already exists."
+  type        = string
+  default     = null
+}
+
 variable "site_subdomain" {
   description = "Subdomain used for the public site."
   type        = string
