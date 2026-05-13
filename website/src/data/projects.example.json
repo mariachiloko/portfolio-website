@@ -1,0 +1,23 @@
+[
+  {
+    "tag": "Infrastructure",
+    "title": "Secure Portfolio Delivery",
+    "summary": "Shows how a public website can be deployed to a private S3 bucket through CloudFront without long-lived AWS credentials.",
+    "stack": ["AWS", "CloudFront", "S3"],
+    "outcome": "Production-shaped delivery with public-repo hygiene."
+  },
+  {
+    "tag": "Automation",
+    "title": "OIDC Deploy Pipeline",
+    "summary": "Documents a GitHub Actions flow that assumes an IAM role with short-lived credentials and no stored AWS access keys.",
+    "stack": ["GitHub Actions", "OIDC", "IAM"],
+    "outcome": "Safer deployments with least-privilege access."
+  },
+  {
+    "tag": "Frontend",
+    "title": "Local Content Fallback",
+    "summary": "Loads private profile and project data when present, then falls back to public example content for the generic template.",
+    "stack": ["React", "TypeScript", "Vite"],
+    "outcome": "One codebase can serve both the template and the real site."
+  }
+]
