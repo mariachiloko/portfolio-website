@@ -6,4 +6,4 @@ This module will own the DNS and certificate naming layer:
 - ACM certificate inputs
 - public site domain records
 
-The current files only define the contract for Phase 4.
+The module now provisions the hosted zone, ACM certificate validation, and Route 53 alias records for the CloudFront distribution.

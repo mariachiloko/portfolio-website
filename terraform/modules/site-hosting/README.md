@@ -6,4 +6,4 @@ This module will own the public site hosting layer:
 - CloudFront distribution
 - origin access control
 
-The current files only define the contract for Phase 4.
+The module now provisions the bucket, bucket protections, CloudFront origin access control, and the distribution itself.

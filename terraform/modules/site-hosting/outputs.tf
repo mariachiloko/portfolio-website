@@ -1,29 +1,29 @@
 output "bucket_name" {
-  description = "Placeholder bucket name contract."
-  value       = "${local.name_prefix}-site"
+  description = "Bucket name for the private origin."
+  value       = aws_s3_bucket.site.bucket
 }
 
 output "bucket_arn" {
-  description = "Placeholder bucket ARN contract."
-  value       = "arn:aws:s3:::${local.name_prefix}-site"
+  description = "Bucket ARN for the private origin."
+  value       = aws_s3_bucket.site.arn
 }
 
 output "distribution_id" {
-  description = "Placeholder CloudFront distribution ID contract."
-  value       = "${local.name_prefix}-distribution"
+  description = "CloudFront distribution ID."
+  value       = aws_cloudfront_distribution.site.id
 }
 
 output "distribution_domain_name" {
-  description = "Placeholder CloudFront domain name contract."
-  value       = "${local.name_prefix}.cloudfront.net"
+  description = "CloudFront distribution domain name."
+  value       = aws_cloudfront_distribution.site.domain_name
+}
+
+output "distribution_hosted_zone_id" {
+  description = "CloudFront hosted zone ID for Route 53 alias records."
+  value       = aws_cloudfront_distribution.site.hosted_zone_id
 }
 
 output "origin_access_control_id" {
-  description = "Placeholder OAC identifier contract."
-  value       = "${local.name_prefix}-oac"
-}
-
-output "site_fqdn" {
-  description = "Fully qualified site domain."
-  value       = local.site_fqdn
+  description = "Origin access control ID."
+  value       = aws_cloudfront_origin_access_control.site.id
 }

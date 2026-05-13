@@ -2,8 +2,8 @@
 
 Reusable Terraform modules live here.
 
-## Planned modules
+## Current modules
 
 - `site-hosting` for private S3 origin and CloudFront delivery
-- `dns` for Route 53 and ACM wiring
+- `dns` for Route 53 hosted zone creation and ACM validation
 - `deployment` for GitHub OIDC and deployment permissions

@@ -1,15 +1,19 @@
 module "site_hosting" {
   source = "../../modules/site-hosting"
 
-  project_name   = var.project_name
-  environment    = var.environment
-  domain_name    = var.domain_name
-  site_subdomain = var.site_subdomain
-  tags           = local.common_tags
+  project_name    = var.project_name
+  environment     = var.environment
+  site_fqdn       = local.site_fqdn
+  certificate_arn = module.dns.certificate_arn
+  tags            = local.common_tags
 }
 
 module "dns" {
   source = "../../modules/dns"
+  providers = {
+    aws           = aws
+    aws.us_east_1 = aws.us_east_1
+  }
 
   domain_name             = var.domain_name
   site_fqdn               = local.site_fqdn
@@ -20,10 +24,35 @@ module "dns" {
 module "deployment" {
   source = "../../modules/deployment"
 
-  repository_full_name = var.github_repository
-  branch_name          = var.github_branch
-  bucket_name          = module.site_hosting.bucket_name
-  distribution_id      = module.site_hosting.distribution_id
-  oidc_audience        = var.oidc_audience
-  tags                 = local.common_tags
+  repository_full_name    = var.github_repository
+  branch_name             = var.github_branch
+  bucket_name             = module.site_hosting.bucket_name
+  distribution_id         = module.site_hosting.distribution_id
+  oidc_audience           = var.oidc_audience
+  github_oidc_thumbprints = var.github_oidc_thumbprints
+  tags                    = local.common_tags
+}
+
+resource "aws_route53_record" "site_alias_a" {
+  zone_id = module.dns.hosted_zone_id
+  name    = local.site_fqdn
+  type    = "A"
+
+  alias {
+    name                   = module.site_hosting.distribution_domain_name
+    zone_id                = module.site_hosting.distribution_hosted_zone_id
+    evaluate_target_health = false
+  }
+}
+
+resource "aws_route53_record" "site_alias_aaaa" {
+  zone_id = module.dns.hosted_zone_id
+  name    = local.site_fqdn
+  type    = "AAAA"
+
+  alias {
+    name                   = module.site_hosting.distribution_domain_name
+    zone_id                = module.site_hosting.distribution_hosted_zone_id
+    evaluate_target_health = false
+  }
 }

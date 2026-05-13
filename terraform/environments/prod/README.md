@@ -1,6 +1,6 @@
 # Prod Environment
 
-This root module will become the live deployment target for the portfolio site.
+This root module is the live deployment target for the portfolio site.
 
 It wires together the shared modules for:
 
@@ -8,4 +8,4 @@ It wires together the shared modules for:
 - DNS and certificate naming
 - deployment permissions
 
-Phase 4 will replace the scaffold with concrete AWS resources.
+The module now creates the AWS resources needed for a private S3 origin, CloudFront, Route 53, ACM validation, and GitHub OIDC deployment access.

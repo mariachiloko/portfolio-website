@@ -8,14 +8,26 @@ variable "environment" {
   type        = string
 }
 
-variable "domain_name" {
-  description = "Primary domain used by the public site."
+variable "site_fqdn" {
+  description = "Fully qualified domain name used by the public site."
   type        = string
 }
 
-variable "site_subdomain" {
-  description = "Subdomain used for the public site."
+variable "certificate_arn" {
+  description = "ACM certificate ARN used by CloudFront."
   type        = string
+}
+
+variable "default_root_object" {
+  description = "Root object served by CloudFront."
+  type        = string
+  default     = "index.html"
+}
+
+variable "price_class" {
+  description = "CloudFront price class for the distribution."
+  type        = string
+  default     = "PriceClass_100"
 }
 
 variable "tags" {

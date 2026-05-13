@@ -46,6 +46,12 @@ variable "oidc_audience" {
   default     = "sts.amazonaws.com"
 }
 
+variable "github_oidc_thumbprints" {
+  description = "Thumbprints for the GitHub OIDC identity provider."
+  type        = list(string)
+  default     = ["6938fd4d98bab03faadb97b34396831e3780aea1"]
+}
+
 variable "tags" {
   description = "Additional tags applied to the environment."
   type        = map(string)
