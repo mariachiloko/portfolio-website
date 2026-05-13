@@ -10,16 +10,16 @@ It is designed to demonstrate:
 - GitHub Actions CI/CD with GitHub OIDC
 - least-privilege IAM and security-aware repo hygiene
 
-The public repository stays generic. Real personal content and media are intentionally excluded from version control and will be supplied from a separate private source when the real site is built.
+The public repository stays generic. Personal content and media are kept out of version control.
 
-## How This Repo Stays Reusable
+## How It Stays Reusable
 
-- Public code stays generic and template-like.
+- Public code stays generic.
 - Example data is checked in so the site works out of the box.
 - Personal content stays outside the public repo.
-- The real production site can use a separate private content source or a private repo.
+- The live site can use a separate private content source or private repo.
 - Branches are not treated as a privacy boundary.
-- Local-only overrides remain gitignored during development.
+- Local overrides remain untracked during development.
 
 See [docs/repo-model.md](docs/repo-model.md) for the full content separation model.
 

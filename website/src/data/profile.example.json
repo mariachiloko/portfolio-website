@@ -2,7 +2,7 @@
   "name": "Your Name",
   "role": "Cloud Engineer and Frontend Builder",
   "location": "Remote, United States",
-  "summary": "This template demonstrates a recruiter-ready AWS portfolio with a secure deployment model, a React frontend, and room for private local content.",
+  "summary": "This example demonstrates a recruiter-ready AWS portfolio with a secure deployment model, a React frontend, and room for private local content.",
   "strengths": [
     "Terraform-managed infrastructure",
     "GitHub Actions OIDC deployments",

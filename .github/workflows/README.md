@@ -1,4 +1,3 @@
 # Workflows
 
-GitHub Actions workflow files will be added in later phases.
-
+GitHub Actions workflow files will be added in a future update.

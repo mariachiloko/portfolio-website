@@ -1,4 +1,3 @@
 # Environments
 
-Environment-specific Terraform roots will be added in later phases.
-
+Environment-specific Terraform roots will be added in a future update.

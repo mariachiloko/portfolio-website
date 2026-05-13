@@ -1,4 +1,3 @@
 # Placeholders
 
-This folder will store public placeholder media assets in later phases.
-
+This folder will store public placeholder media assets in a future update.

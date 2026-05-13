@@ -15,9 +15,9 @@
   },
   {
     "tag": "Frontend",
-    "title": "Local Content Fallback",
-    "summary": "Loads private profile and project data when present, then falls back to public example content for the generic template.",
+    "title": "Content Fallback",
+    "summary": "Loads private profile and project data when present, then falls back to public example content for the generic site.",
     "stack": ["React", "TypeScript", "Vite"],
-    "outcome": "One codebase can serve both the template and the real site."
+    "outcome": "One codebase can serve both the example site and the real site."
   }
 ]

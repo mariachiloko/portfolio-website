@@ -1,4 +1,3 @@
 # Modules
 
-Reusable Terraform modules will be added in later phases.
-
+Reusable Terraform modules will be added in a future update.
