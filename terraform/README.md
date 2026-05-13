@@ -12,3 +12,4 @@ Terraform infrastructure code will live here.
 - A `prod` environment root wires the AWS resources together.
 - The shared modules provision site hosting, DNS and ACM validation, and GitHub OIDC deployment access.
 - The root environment adds Route 53 alias records for the public site hostname.
+- If you use a custom domain, update your registrar or parent zone with the Route 53 name servers from the prod outputs.
