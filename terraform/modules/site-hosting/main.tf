@@ -90,7 +90,7 @@ resource "aws_cloudfront_distribution" "site" {
   is_ipv6_enabled     = true
   comment             = "Portfolio site for ${var.site_fqdn}"
   default_root_object = var.default_root_object
-  aliases             = [var.site_fqdn]
+  aliases             = length(var.aliases) > 0 ? var.aliases : [var.site_fqdn]
   price_class         = var.price_class
 
   origin {

@@ -13,6 +13,12 @@ variable "site_fqdn" {
   type        = string
 }
 
+variable "aliases" {
+  description = "Domain aliases accepted by the CloudFront distribution."
+  type        = list(string)
+  default     = []
+}
+
 variable "certificate_arn" {
   description = "ACM certificate ARN used by CloudFront."
   type        = string

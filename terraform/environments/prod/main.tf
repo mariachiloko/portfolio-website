@@ -4,6 +4,7 @@ module "site_hosting" {
   project_name    = var.project_name
   environment     = var.environment
   site_fqdn       = local.site_fqdn
+  aliases         = local.site_aliases
   certificate_arn = module.dns.certificate_arn
   tags            = local.common_tags
 }
@@ -35,8 +36,10 @@ module "deployment" {
 }
 
 resource "aws_route53_record" "site_alias_a" {
+  for_each = toset(local.site_aliases)
+
   zone_id = module.dns.hosted_zone_id
-  name    = local.site_fqdn
+  name    = each.value
   type    = "A"
 
   alias {
@@ -47,8 +50,10 @@ resource "aws_route53_record" "site_alias_a" {
 }
 
 resource "aws_route53_record" "site_alias_aaaa" {
+  for_each = toset(local.site_aliases)
+
   zone_id = module.dns.hosted_zone_id
-  name    = local.site_fqdn
+  name    = each.value
   type    = "AAAA"
 
   alias {
