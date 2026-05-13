@@ -29,6 +29,7 @@ website/src/data/projects.local.json
 website/public/media/personal/
 website/public/resume/*
 !website/public/resume/README.md
+private-content/
 
 # Editor and OS files
 .DS_Store
