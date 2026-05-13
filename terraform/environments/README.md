@@ -1,3 +1,7 @@
 # Environments
 
-Environment-specific Terraform roots will be added in a future update.
+Environment-specific Terraform roots live here.
+
+## Current environment
+
+- `prod` is the root module for the live site deployment target.
