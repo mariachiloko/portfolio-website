@@ -9,6 +9,7 @@ It wires together the shared modules for:
 - deployment permissions
 
 The module now creates the AWS resources needed for a private S3 origin, CloudFront, Route 53, ACM validation, and GitHub OIDC deployment access.
+It also creates a separate private content bucket that the deploy role can read before the site build runs.
 
 ## Private Variables
 

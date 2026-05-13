@@ -1,7 +1,8 @@
 data "aws_caller_identity" "current" {}
 
 locals {
-  role_name = replace("${var.repository_full_name}-${var.branch_name}-deploy", "/", "-")
+  role_name    = replace("${var.repository_full_name}-${var.branch_name}-deploy", "/", "-")
+  oidc_subject = var.environment_name == null ? "repo:${var.repository_full_name}:ref:refs/heads/${var.branch_name}" : "repo:${var.repository_full_name}:environment:${var.environment_name}"
 }
 
 resource "aws_iam_openid_connect_provider" "github" {
@@ -28,12 +29,37 @@ data "aws_iam_policy_document" "assume_role" {
     condition {
       test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = ["repo:${var.repository_full_name}:ref:refs/heads/${var.branch_name}"]
+      values   = [local.oidc_subject]
     }
   }
 }
 
 data "aws_iam_policy_document" "deploy" {
+  statement {
+    sid = "AllowPrivateContentListing"
+
+    actions = [
+      "s3:GetBucketLocation",
+      "s3:ListBucket",
+    ]
+
+    resources = [
+      "arn:aws:s3:::${var.private_content_bucket_name}",
+    ]
+  }
+
+  statement {
+    sid = "AllowPrivateContentRead"
+
+    actions = [
+      "s3:GetObject",
+    ]
+
+    resources = [
+      "arn:aws:s3:::${var.private_content_bucket_name}/*",
+    ]
+  }
+
   statement {
     sid = "AllowBucketListing"
 

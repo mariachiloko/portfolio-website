@@ -1,6 +1,8 @@
 import { contentSource, profile, projects } from './data/content';
 
 function App() {
+  const profilePhoto = profile.photo ?? '/media/placeholders/profile-photo.svg';
+
   const highlights = [
     'Private S3 origin behind CloudFront',
     'GitHub OIDC deploys with short-lived AWS access',
@@ -58,6 +60,9 @@ function App() {
           </ul>
         </div>
         <aside className="hero-card">
+          <div className="hero-portrait">
+            <img src={profilePhoto} alt={`${profile.name} portrait`} />
+          </div>
           <div className="hero-card-block">
             <p className="card-label">Content source</p>
             <strong>{contentSource.profile}</strong>
@@ -76,6 +81,14 @@ function App() {
             <p className="card-label">Delivery model</p>
             <p>The public scaffold stays reusable while the live site can load private content locally.</p>
           </div>
+          {profile.resume ? (
+            <div className="hero-card-block">
+              <p className="card-label">Resume</p>
+              <a className="resume-link" href={profile.resume} target="_blank" rel="noreferrer">
+                Open resume
+              </a>
+            </div>
+          ) : null}
         </aside>
       </section>
 

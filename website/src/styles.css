@@ -269,6 +269,20 @@ a:hover {
   padding: 1.25rem;
 }
 
+.hero-portrait {
+  overflow: hidden;
+  border: 1px solid rgba(170, 188, 214, 0.12);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.hero-portrait img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
 .hero-card-block {
   display: grid;
   gap: 0.45rem;
@@ -285,6 +299,21 @@ a:hover {
 
 .hero-card p {
   margin: 0;
+}
+
+.resume-link {
+  width: fit-content;
+  padding: 0.7rem 1rem;
+  border: 1px solid rgba(139, 227, 193, 0.24);
+  border-radius: 999px;
+  color: var(--accent);
+  background: rgba(7, 17, 31, 0.42);
+  font-weight: 600;
+}
+
+.resume-link:hover {
+  border-color: rgba(139, 227, 193, 0.38);
+  background: rgba(7, 17, 31, 0.58);
 }
 
 .card-label {

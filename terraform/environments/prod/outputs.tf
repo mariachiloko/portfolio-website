@@ -8,6 +8,11 @@ output "bucket_name" {
   value       = module.site_hosting.bucket_name
 }
 
+output "private_content_bucket_name" {
+  description = "Name of the private content source bucket."
+  value       = aws_s3_bucket.private_content.bucket
+}
+
 output "distribution_domain_name" {
   description = "CloudFront domain name for the site."
   value       = module.site_hosting.distribution_domain_name

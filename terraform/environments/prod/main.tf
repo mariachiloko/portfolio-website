@@ -26,13 +26,15 @@ module "dns" {
 module "deployment" {
   source = "../../modules/deployment"
 
-  repository_full_name    = var.github_repository
-  branch_name             = var.github_branch
-  bucket_name             = module.site_hosting.bucket_name
-  distribution_id         = module.site_hosting.distribution_id
-  oidc_audience           = var.oidc_audience
-  github_oidc_thumbprints = var.github_oidc_thumbprints
-  tags                    = local.common_tags
+  repository_full_name        = var.github_repository
+  branch_name                 = var.github_branch
+  environment_name            = "production"
+  bucket_name                 = module.site_hosting.bucket_name
+  private_content_bucket_name = aws_s3_bucket.private_content.bucket
+  distribution_id             = module.site_hosting.distribution_id
+  oidc_audience               = var.oidc_audience
+  github_oidc_thumbprints     = var.github_oidc_thumbprints
+  tags                        = local.common_tags
 }
 
 resource "aws_route53_record" "site_alias_a" {

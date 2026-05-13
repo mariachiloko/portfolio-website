@@ -103,13 +103,7 @@ async function syncPrivateContent() {
 
   const mediaCopied = await copyTree(sourceMediaDir, targetMediaDir);
 
-  const resumeSource = path.join(sourceResumeDir, 'miguel-cervantes-resume.pdf');
-  const resumeTarget = path.join(targetResumeDir, 'miguel-cervantes-resume.pdf');
-  let resumeCopied = 0;
-  if (await pathExists(resumeSource)) {
-    await copyFile(resumeSource, resumeTarget);
-    resumeCopied = 1;
-  }
+  const resumeCopied = await copyTree(sourceResumeDir, targetResumeDir);
 
   if (copiedData.length === 0 && mediaCopied === 0 && resumeCopied === 0) {
     console.log('No private content source found. Using public example content.');

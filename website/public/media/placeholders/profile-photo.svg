@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Profile placeholder</title>
+  <desc id="desc">Abstract portrait placeholder with initials MC.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#12233e"/>
+      <stop offset="100%" stop-color="#0c1628"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8be3c1"/>
+      <stop offset="100%" stop-color="#53cda0"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1000" rx="64" fill="url(#bg)"/>
+  <circle cx="400" cy="360" r="150" fill="#1d3358"/>
+  <path d="M210 820c28-127 141-204 190-204s162 77 190 204" fill="#1d3358"/>
+  <circle cx="400" cy="344" r="88" fill="#ebf4ff" opacity="0.9"/>
+  <path d="M260 840c20-92 107-154 140-154s120 62 140 154" fill="#ebf4ff" opacity="0.12"/>
+  <rect x="144" y="128" width="512" height="744" rx="52" fill="none" stroke="#2c436a" stroke-width="8"/>
+  <text x="400" y="675" font-family="Georgia, serif" font-size="120" text-anchor="middle" fill="url(#accent)">MC</text>
+</svg>

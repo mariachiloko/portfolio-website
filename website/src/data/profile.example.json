@@ -3,6 +3,7 @@
   "role": "Cloud Engineer and Frontend Builder",
   "location": "Remote, United States",
   "summary": "This example demonstrates a recruiter-ready AWS portfolio with a secure deployment model, a React frontend, and room for private local content.",
+  "photo": "/media/placeholders/profile-photo.svg",
   "strengths": [
     "Terraform-managed infrastructure",
     "GitHub Actions OIDC deployments",

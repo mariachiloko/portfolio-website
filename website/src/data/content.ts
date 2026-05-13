@@ -12,6 +12,8 @@ export interface ProfileContent {
   summary: string;
   strengths: string[];
   links: LinkItem[];
+  photo?: string;
+  resume?: string;
 }
 
 export interface ProjectContent {
