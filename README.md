@@ -23,6 +23,14 @@ The public repository stays generic. Personal content and media are kept out of 
 
 See [docs/repo-model.md](docs/repo-model.md) for the full content separation model.
 
+## How To Explain This Project
+
+- The public repository shows the reusable portfolio scaffold, not the private production content.
+- The frontend reads example data by default and can load private local content when it exists.
+- Terraform provisions the AWS foundation: private S3, CloudFront, Route 53, ACM, and the GitHub OIDC deploy role.
+- GitHub Actions builds the site and deploys the static output to AWS without storing long-lived keys.
+- The public repo stays generic so recruiters can inspect the architecture without seeing personal data.
+
 ## Repository Rules
 
 - Do not commit secrets, `.env` files, Terraform state, or AWS credentials.
