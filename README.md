@@ -17,7 +17,7 @@ The public repository stays generic. Personal content and media are kept out of 
 - Public code stays generic.
 - Example data is checked in so the site works out of the box.
 - Personal content stays outside the public repo.
-- The live site can use a separate private content source or private repo.
+- The live site can use a separate private content repository that GitHub Actions checks out during deploy.
 - Branches are not treated as a privacy boundary.
 - Local overrides remain untracked during development.
 
@@ -28,7 +28,7 @@ See [docs/repo-model.md](docs/repo-model.md) for the full content separation mod
 - The public repository shows the reusable portfolio scaffold, not the private production content.
 - The frontend reads example data by default and can load private local content when it exists.
 - Terraform provisions the AWS foundation: private S3, CloudFront, Route 53, ACM, and the GitHub OIDC deploy role.
-- GitHub Actions builds the site and deploys the static output to AWS without storing long-lived keys.
+- GitHub Actions checks out the private content source, mirrors it to S3, builds the site, and deploys the static output to AWS without storing long-lived keys.
 - The public repo stays generic so recruiters can inspect the architecture without seeing personal data.
 
 ## Repository Rules

@@ -36,11 +36,12 @@ data "aws_iam_policy_document" "assume_role" {
 
 data "aws_iam_policy_document" "deploy" {
   statement {
-    sid = "AllowPrivateContentListing"
+    sid = "AllowPrivateContentSync"
 
     actions = [
       "s3:GetBucketLocation",
       "s3:ListBucket",
+      "s3:ListBucketMultipartUploads",
     ]
 
     resources = [
@@ -49,10 +50,13 @@ data "aws_iam_policy_document" "deploy" {
   }
 
   statement {
-    sid = "AllowPrivateContentRead"
+    sid = "AllowPrivateContentObjectSync"
 
     actions = [
+      "s3:AbortMultipartUpload",
+      "s3:DeleteObject",
       "s3:GetObject",
+      "s3:PutObject",
     ]
 
     resources = [
@@ -61,11 +65,12 @@ data "aws_iam_policy_document" "deploy" {
   }
 
   statement {
-    sid = "AllowBucketListing"
+    sid = "AllowSiteBucketSync"
 
     actions = [
       "s3:GetBucketLocation",
       "s3:ListBucket",
+      "s3:ListBucketMultipartUploads",
     ]
 
     resources = [
@@ -74,13 +79,12 @@ data "aws_iam_policy_document" "deploy" {
   }
 
   statement {
-    sid = "AllowArtifactSync"
+    sid = "AllowSiteObjectSync"
 
     actions = [
       "s3:AbortMultipartUpload",
       "s3:DeleteObject",
       "s3:GetObject",
-      "s3:ListBucketMultipartUploads",
       "s3:PutObject",
     ]
 
