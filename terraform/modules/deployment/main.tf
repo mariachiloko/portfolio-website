@@ -29,7 +29,7 @@ data "aws_iam_policy_document" "assume_role" {
     condition {
       test     = "StringEquals"
       variable = "token.actions.githubusercontent.com:sub"
-      values   = [local.oidc_subject]
+      values   = concat([local.oidc_subject], var.additional_oidc_subjects)
     }
   }
 }

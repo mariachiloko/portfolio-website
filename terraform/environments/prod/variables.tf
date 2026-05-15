@@ -46,6 +46,18 @@ variable "github_branch" {
   default     = "master"
 }
 
+variable "private_content_repository" {
+  description = "Private repository that publishes content to S3."
+  type        = string
+  default     = "mariachiloko/portfolio-private-content"
+}
+
+variable "private_content_branch" {
+  description = "Branch in the private repository that publishes content."
+  type        = string
+  default     = "main"
+}
+
 variable "oidc_audience" {
   description = "OIDC audience used by GitHub Actions."
   type        = string

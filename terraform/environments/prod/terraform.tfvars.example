@@ -6,6 +6,8 @@ site_subdomain      = "www"
 hosted_zone_id      = "Z123EXAMPLEHOSTEDZONE"
 github_repository   = "owner/repo"
 github_branch       = "master"
+private_content_repository = "owner/portfolio-private-content"
+private_content_branch     = "main"
 oidc_audience       = "sts.amazonaws.com"
 
 # Optional tags

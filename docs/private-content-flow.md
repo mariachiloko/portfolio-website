@@ -173,6 +173,7 @@ For the workflow to work, GitHub needs a few repository settings:
 - `PRIVATE_CONTENT_BUCKET_NAME` so Actions knows where to mirror the content
 - the normal AWS and CloudFront variables for the public site deploy
 - a dispatch token in the private repo so it can notify the public repo after content changes
+- the public AWS role trust now includes the private repo publish branch, so both workflows can use the same role ARN
 
 If one of those values is missing, the workflow can still run but it will fail when it tries to fetch or publish content.
 

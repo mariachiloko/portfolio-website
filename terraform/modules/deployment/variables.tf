@@ -14,6 +14,12 @@ variable "environment_name" {
   default     = null
 }
 
+variable "additional_oidc_subjects" {
+  description = "Extra GitHub OIDC subjects allowed to assume the deployment role."
+  type        = list(string)
+  default     = []
+}
+
 variable "bucket_name" {
   description = "Name of the bucket that will receive build output."
   type        = string

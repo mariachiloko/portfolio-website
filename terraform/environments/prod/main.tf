@@ -26,9 +26,12 @@ module "dns" {
 module "deployment" {
   source = "../../modules/deployment"
 
-  repository_full_name        = var.github_repository
-  branch_name                 = var.github_branch
-  environment_name            = "production"
+  repository_full_name = var.github_repository
+  branch_name          = var.github_branch
+  environment_name     = "production"
+  additional_oidc_subjects = [
+    "repo:${var.private_content_repository}:ref:refs/heads/${var.private_content_branch}",
+  ]
   bucket_name                 = module.site_hosting.bucket_name
   private_content_bucket_name = aws_s3_bucket.private_content.bucket
   distribution_id             = module.site_hosting.distribution_id
