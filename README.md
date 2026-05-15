@@ -29,7 +29,7 @@ See [docs/private-content-flow.md](docs/private-content-flow.md) for a step-by-s
 - The public repository shows the reusable portfolio scaffold, not the private production content.
 - The frontend reads example data by default and can load private local content when it exists.
 - Terraform provisions the AWS foundation: private S3, CloudFront, Route 53, ACM, and the GitHub OIDC deploy role.
-- GitHub Actions checks out the private content source, mirrors it to S3, builds the site, and deploys the static output to AWS without storing long-lived keys.
+- GitHub Actions can be triggered by either a public code push or a private-content dispatch event, then checks out the private content source, mirrors it to S3, builds the site, and deploys the static output to AWS without storing long-lived keys.
 - The public repo stays generic so recruiters can inspect the architecture without seeing personal data.
 
 ## Repository Rules

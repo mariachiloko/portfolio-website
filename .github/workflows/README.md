@@ -1,8 +1,10 @@
 # Workflows
 
-`deploy.yml` builds the React app on pull requests and push events, then deploys the production build to AWS on `master` using GitHub OIDC.
+`deploy.yml` builds the React app on pull requests, push events, and private-content dispatch events, then deploys the production build to AWS on `master` using GitHub OIDC.
 
 On production deploys, the workflow also checks out a separate private content repository, mirrors that content into the private S3 bucket, and then builds the site from the private files.
+
+Private repo pushes should send a `repository_dispatch` event to this workflow so content-only changes can redeploy without touching the public repo.
 
 Set the following repository variables before enabling deployments:
 

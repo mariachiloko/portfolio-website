@@ -77,6 +77,14 @@ The commit to `master` triggers the GitHub Actions workflow.
 
 That workflow is the automation that performs the deployment.
 
+### 2b. A private content push can also trigger deployment
+
+When you push to the private content repo, that repo can send a `repository_dispatch` event to the public repo.
+
+That dispatch event tells the public workflow that content changed and it should redeploy.
+
+This is the piece that removes the need to manually jump back to the public repo every time you update content.
+
 ### 3. GitHub Actions checks out the private content source
 
 The deploy job uses a separate private repository or private content source.
@@ -181,3 +189,50 @@ For the workflow to work, GitHub needs a few repository settings:
 - the normal AWS and CloudFront variables for the public site deploy
 
 If one of those values is missing, the workflow can still run but it will fail when it tries to fetch or publish content.
+
+## How The Trigger Works
+
+The cleanest real-world setup is:
+
+1. You push content changes to the private repo.
+2. A workflow in the private repo sends a `repository_dispatch` event to the public repo.
+3. The public repo workflow runs.
+4. The public workflow checks out the private content repo, mirrors it to S3, builds the site, and deploys it.
+
+That means the private repo becomes the content source and the public repo becomes the deployment target.
+
+If you also push code changes in the public repo, the same public workflow still runs on `push` to `master`.
+So both content changes and code changes land in the same deployment pipeline.
+
+### Example private-repo trigger
+
+The private repo needs a small workflow that notifies the public repo after content changes.
+
+Example shape:
+
+```yaml
+name: Notify public deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify public repo
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $TOKEN" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/OWNER/portfolio-website/dispatches \
+            -d '{"event_type":"content-updated"}'
+        env:
+          TOKEN: ${{ secrets.PUBLIC_REPO_DISPATCH_TOKEN }}
+```
+
+The token in the private repo should have permission to send a dispatch event to the public repo.
+You only need to wire that up once.
