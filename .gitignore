@@ -24,8 +24,7 @@ terraform.tfvars
 terraform.tfvars.json
 
 # Local-only portfolio content
-website/src/data/profile.local.json
-website/src/data/projects.local.json
+website/src/data/*.local.json
 website/public/media/personal/
 website/public/resume/*
 !website/public/resume/README.md

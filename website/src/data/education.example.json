@@ -1,0 +1,11 @@
+[
+  {
+    "school": "Example University",
+    "degree": "Bachelor's Degree",
+    "dates": "Example dates",
+    "details": [
+      "Relevant coursework",
+      "Technical focus area"
+    ]
+  }
+]

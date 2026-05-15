@@ -91,7 +91,13 @@ async function syncPrivateContent() {
 
   const copiedData = [];
 
-  for (const fileName of ['profile.local.json', 'projects.local.json']) {
+  for (const fileName of [
+    'profile.local.json',
+    'projects.local.json',
+    'experience.local.json',
+    'education.local.json',
+    'certifications.local.json',
+  ]) {
     const sourcePath = path.join(sourceDataDir, fileName);
     const targetPath = path.join(targetDataDir, fileName);
 

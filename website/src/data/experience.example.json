@@ -1,0 +1,13 @@
+[
+  {
+    "company": "Enterprise IT Team",
+    "role": "Infrastructure Support Specialist",
+    "dates": "Example role",
+    "summary": "Hands-on support work in Microsoft, endpoint, and virtualization environments.",
+    "responsibilities": [
+      "Support Active Directory and identity workflows",
+      "Troubleshoot endpoint and printing issues",
+      "Document systems and support procedures"
+    ]
+  }
+]

@@ -24,6 +24,27 @@ export interface ProjectContent {
   outcome: string;
 }
 
+export interface ExperienceContent {
+  company: string;
+  role: string;
+  dates?: string;
+  summary: string;
+  responsibilities: string[];
+}
+
+export interface EducationContent {
+  school: string;
+  degree: string;
+  dates: string;
+  details?: string[];
+}
+
+export interface CertificationContent {
+  name: string;
+  issuer?: string;
+  status?: string;
+}
+
 type JsonModule = {
   default: unknown;
 };
@@ -58,11 +79,22 @@ function loadContent<T>(baseName: string): { value: T; source: ContentSource } {
 
 const profileContent = loadContent<ProfileContent>('profile');
 const projectsContent = loadContent<ProjectContent[]>('projects');
+const experienceContent = loadContent<ExperienceContent[]>('experience');
+const educationContent = loadContent<EducationContent[]>('education');
+const certificationsContent = loadContent<CertificationContent[]>(
+  'certifications',
+);
 
 export const profile = profileContent.value;
 export const projects = projectsContent.value;
+export const experience = experienceContent.value;
+export const education = educationContent.value;
+export const certifications = certificationsContent.value;
 
 export const contentSource = {
   profile: profileContent.source,
   projects: projectsContent.source,
+  experience: experienceContent.source,
+  education: educationContent.source,
+  certifications: certificationsContent.source,
 };
