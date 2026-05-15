@@ -49,7 +49,7 @@ It is your local editing area for the real site content.
 
 The private S3 bucket is the shared handoff point for deployment.
 
-GitHub Actions mirrors the private content into that bucket so the deploy job can use it.
+GitHub Actions in the private repo mirrors the private content into that bucket before it notifies the public repo.
 
 ### Public site bucket
 
@@ -71,47 +71,35 @@ Example:
 
 You do **not** put those files in the public repo.
 
-### 2. You push a commit to the public repo
+### 2. You push a commit to the private repo
 
-The commit to `master` triggers the GitHub Actions workflow.
+The private repo workflow syncs the private content into the private S3 bucket.
 
-That workflow is the automation that performs the deployment.
-
-### 2b. A private content push can also trigger deployment
-
-When you push to the private content repo, that repo can send a `repository_dispatch` event to the public repo.
+Then it sends a `repository_dispatch` event to the public repo.
 
 That dispatch event tells the public workflow that content changed and it should redeploy.
 
 This is the piece that removes the need to manually jump back to the public repo every time you update content.
 
-### 3. GitHub Actions checks out the private content source
+### 3. GitHub Actions reads the private content from S3
 
-The deploy job uses a separate private repository or private content source.
-
-It checks out that source into the workflow runner.
+The public repo workflow syncs the latest private content from the S3 bucket into the runner.
 
 This is important because the public repo still does not contain your personal files.
 
-### 4. GitHub Actions mirrors the private content into S3
+### 4. GitHub Actions builds the site
 
-The workflow syncs the checked-out private files into the private S3 content bucket.
-
-This step keeps the private S3 bucket in sync with the current private content source.
-
-### 5. GitHub Actions builds the site
-
-The site build reads the checked-out private content in the workflow runner.
+The site build reads the synced private content in the workflow runner.
 
 The React app then uses the real content instead of the generic example content.
 
-### 6. GitHub Actions uploads the built site
+### 5. GitHub Actions uploads the built site
 
 After the build finishes, the workflow syncs the generated `dist/` folder to the public site bucket.
 
 That bucket holds the static files that visitors will load.
 
-### 7. CloudFront is invalidated
+### 6. CloudFront is invalidated
 
 The workflow creates a CloudFront invalidation.
 
@@ -171,9 +159,9 @@ That is what keeps the public repository generic while still letting the live si
 
 These are the concrete repo changes that support this flow:
 
-- The deploy workflow now checks out a separate private content source before building.
-- The workflow mirrors that private content into the private S3 content bucket.
-- The deploy IAM role now has permission to write to the private content bucket and the public site bucket.
+- The public deploy workflow reads private content from S3 instead of checking out the private repo directly.
+- The private repo workflow is responsible for syncing private content into the private S3 bucket.
+- The private repo workflow sends a dispatch event to start the public deploy.
 - The repository documentation now explains the content separation model in plain language.
 
 In practice, that means the public repo describes and automates the deployment flow, but it still does not contain your personal files.
@@ -182,11 +170,9 @@ In practice, that means the public repo describes and automates the deployment f
 
 For the workflow to work, GitHub needs a few repository settings:
 
-- `PRIVATE_CONTENT_REPOSITORY` so Actions knows which private repo to check out
-- `PRIVATE_CONTENT_REF` so Actions knows which branch or tag to use
-- `PRIVATE_CONTENT_TOKEN` so Actions can access the private repo
 - `PRIVATE_CONTENT_BUCKET_NAME` so Actions knows where to mirror the content
 - the normal AWS and CloudFront variables for the public site deploy
+- a dispatch token in the private repo so it can notify the public repo after content changes
 
 If one of those values is missing, the workflow can still run but it will fail when it tries to fetch or publish content.
 
@@ -195,9 +181,10 @@ If one of those values is missing, the workflow can still run but it will fail w
 The cleanest real-world setup is:
 
 1. You push content changes to the private repo.
-2. A workflow in the private repo sends a `repository_dispatch` event to the public repo.
-3. The public repo workflow runs.
-4. The public workflow checks out the private content repo, mirrors it to S3, builds the site, and deploys it.
+2. The private repo workflow syncs the content into the private S3 bucket.
+3. The private repo workflow sends a `repository_dispatch` event to the public repo.
+4. The public repo workflow runs.
+5. The public workflow reads the private content from S3, builds the site, and deploys it.
 
 That means the private repo becomes the content source and the public repo becomes the deployment target.
 
@@ -206,12 +193,12 @@ So both content changes and code changes land in the same deployment pipeline.
 
 ### Example private-repo trigger
 
-The private repo needs a small workflow that notifies the public repo after content changes.
+The private repo needs a small workflow that first syncs content to S3 and then notifies the public repo.
 
 Example shape:
 
 ```yaml
-name: Notify public deploy
+name: Publish private content
 
 on:
   push:
@@ -219,9 +206,21 @@ on:
       - main
 
 jobs:
-  dispatch:
+  publish:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout private content
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Sync content to private S3 bucket
+        run: aws s3 sync . "s3://${{ secrets.PRIVATE_CONTENT_BUCKET_NAME }}" --delete
+
       - name: Notify public repo
         run: |
           curl -X POST \
@@ -234,5 +233,6 @@ jobs:
           TOKEN: ${{ secrets.PUBLIC_REPO_DISPATCH_TOKEN }}
 ```
 
+The private repo also needs AWS permissions to write to the private content bucket.
 The token in the private repo should have permission to send a dispatch event to the public repo.
 You only need to wire that up once.

@@ -30,15 +30,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Checkout private content
-        if: github.event_name == 'repository_dispatch'
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ vars.PRIVATE_CONTENT_REPOSITORY }}
-          ref: ${{ vars.PRIVATE_CONTENT_REF }}
-          token: ${{ secrets.PRIVATE_CONTENT_TOKEN }}
-          path: private-content
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -77,14 +68,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Checkout private content
-        uses: actions/checkout@v4
-        with:
-          repository: ${{ vars.PRIVATE_CONTENT_REPOSITORY }}
-          ref: ${{ vars.PRIVATE_CONTENT_REF }}
-          token: ${{ secrets.PRIVATE_CONTENT_TOKEN }}
-          path: private-content
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -101,8 +84,8 @@ jobs:
           role-to-assume: ${{ vars.AWS_ROLE_ARN }}
           aws-region: ${{ vars.AWS_REGION }}
 
-      - name: Mirror private content to S3
-        run: aws s3 sync ../private-content "s3://${{ vars.PRIVATE_CONTENT_BUCKET_NAME }}" --delete
+      - name: Sync private content from S3
+        run: aws s3 sync "s3://${{ vars.PRIVATE_CONTENT_BUCKET_NAME }}" ../private-content --delete
 
       - name: Build site
         run: npm run build

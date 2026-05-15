@@ -27,8 +27,8 @@ This project is designed as a public scaffold with a separate private content so
 
 - The public repository is safe to share because it only contains generic code, example content, and infrastructure code.
 - The private content layer can change without forcing the public repository to carry personal data.
-- A push to the private repo can notify the public repo with a dispatch event, so content changes still redeploy automatically.
-- GitHub Actions can check out the private repo at deploy time, mirror it to S3, and build the live site without exposing the content in the public repo.
+- A push to the private repo can sync content to S3 and notify the public repo with a dispatch event, so content changes still redeploy automatically.
+- GitHub Actions can read the private content from S3 at deploy time without exposing the content in the public repo.
 - The same application code can serve both the public example site and the private production site.
 - The deployment pipeline can be explained cleanly in interviews because each layer has one job.
 
