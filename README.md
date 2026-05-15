@@ -22,6 +22,7 @@ The public repository stays generic. Personal content and media are kept out of 
 - Local overrides remain untracked during development.
 
 See [docs/repo-model.md](docs/repo-model.md) for the full content separation model.
+See [docs/private-content-flow.md](docs/private-content-flow.md) for a step-by-step explanation of how private content reaches the live site.
 
 ## How To Explain This Project
 

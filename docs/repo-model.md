@@ -30,3 +30,5 @@ This project is designed as a public scaffold with a separate private content so
 - GitHub Actions can check out the private repo at deploy time, mirror it to S3, and build the live site without exposing the content in the public repo.
 - The same application code can serve both the public example site and the private production site.
 - The deployment pipeline can be explained cleanly in interviews because each layer has one job.
+
+For a plain-language walkthrough of the deployment flow, see [docs/private-content-flow.md](private-content-flow.md).
