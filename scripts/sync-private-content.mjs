@@ -13,6 +13,7 @@ const targetResumeDir = path.join(websiteRoot, 'public', 'resume');
 const sourceDataDir = path.join(privateRoot, 'data');
 const sourceMediaDir = path.join(privateRoot, 'media', 'personal');
 const sourceResumeDir = path.join(privateRoot, 'resume');
+const publicMediaExtensions = new Set(['.avif', '.gif', '.jpeg', '.jpg', '.png', '.svg', '.webp']);
 
 async function pathExists(targetPath) {
   try {
@@ -53,7 +54,7 @@ async function clearDirectoryContents(targetDir, keepNames = []) {
   );
 }
 
-async function copyTree(sourceDir, targetDir) {
+async function copyTree(sourceDir, targetDir, options = {}) {
   if (!(await pathExists(sourceDir))) {
     return 0;
   }
@@ -67,7 +68,15 @@ async function copyTree(sourceDir, targetDir) {
       const targetPath = path.join(targetDir, entry.name);
 
       if (entry.isDirectory()) {
-        return copyTree(sourcePath, targetPath);
+        return copyTree(sourcePath, targetPath, options);
+      }
+
+      if (entry.name === '.DS_Store') {
+        return 0;
+      }
+
+      if (options.allowedExtensions && !options.allowedExtensions.has(path.extname(entry.name).toLowerCase())) {
+        return 0;
       }
 
       await ensureParentDirectory(targetPath);
@@ -107,7 +116,9 @@ async function syncPrivateContent() {
     }
   }
 
-  const mediaCopied = await copyTree(sourceMediaDir, targetMediaDir);
+  const mediaCopied = await copyTree(sourceMediaDir, targetMediaDir, {
+    allowedExtensions: publicMediaExtensions,
+  });
 
   const resumeCopied = await copyTree(sourceResumeDir, targetResumeDir);
 

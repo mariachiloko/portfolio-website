@@ -12,9 +12,9 @@ function App() {
   const resumeLabel = profile.resume?.endsWith('.pdf') ? 'Download resume' : 'Open resume';
 
   const heroHighlights = [
-    'Enterprise IT support plus cloud engineering projects',
-    'AWS, Terraform, GitHub Actions, IAM, and OIDC',
-    'Infrastructure-first mindset with documentation habits',
+    'AWS/Terraform infrastructure and deployment automation',
+    'Enterprise identity, endpoint, and production support',
+    'Systems analysis mindset with documented runbooks',
   ];
 
   const cloudSkills = [
@@ -77,7 +77,7 @@ function App() {
       <section className="hero">
         <div className="hero-copy">
           <div className="hero-topline">
-            <p className="eyebrow">Cloud engineering portfolio</p>
+            <p className="eyebrow">Cloud operations portfolio</p>
             <span className="status-badge">
               {contentSource.profile === 'local' ? 'Private content active' : 'Example content active'}
             </span>
@@ -123,7 +123,7 @@ function App() {
           </div>
           <div className="hero-card-block">
             <p className="card-label">Current focus</p>
-            <strong>Infrastructure-focused IT professional transitioning into Cloud Engineering</strong>
+            <strong>Infrastructure-focused IT professional working across cloud operations, automation, and systems analysis.</strong>
             <span>{profile.location}</span>
           </div>
           <div className="hero-card-block">
@@ -133,8 +133,8 @@ function App() {
           <div className="hero-card-block">
             <p className="card-label">Enterprise background</p>
             <p>
-              Active Directory, Entra ID, Citrix, KACE, VMware, printing workflows, and technical support in a manufacturing
-              environment.
+              Active Directory, Entra ID, Citrix, KACE, VMware, printing workflows, and technical support in a
+              manufacturing environment.
             </p>
           </div>
         </aside>
@@ -143,7 +143,7 @@ function App() {
       <section className="section">
         <div className="section-heading">
           <p className="eyebrow">About</p>
-          <h2>Infrastructure support and cloud projects come together in one practical, recruiter-friendly story.</h2>
+          <h2>Enterprise operations and AWS projects come together in one practical cloud operations story.</h2>
         </div>
         <div className="about-grid">
           <article className="detail-card">
@@ -153,9 +153,9 @@ function App() {
           <article className="detail-card">
             <p className="card-label">How I work</p>
             <ul className="detail-list">
-              <li>Focus on systems, networking, and secure delivery.</li>
-              <li>Document what I build so others can follow it.</li>
-              <li>Use troubleshooting and support work to sharpen cloud judgment.</li>
+              <li>Connect support work to systems reliability, access control, and operational risk.</li>
+              <li>Document workflows so infrastructure changes are repeatable and easier to hand off.</li>
+              <li>Use troubleshooting and production support work to sharpen cloud operations judgment.</li>
               <li>Keep the public site clean while preserving private content locally.</li>
             </ul>
           </article>
@@ -165,7 +165,7 @@ function App() {
       <section className="section">
         <div className="section-heading">
           <p className="eyebrow">Skills</p>
-          <h2>A mix of cloud engineering, enterprise support, and practical troubleshooting.</h2>
+          <h2>A mix of cloud operations, infrastructure automation, enterprise support, and practical troubleshooting.</h2>
         </div>
         <div className="skills-grid">
           <article className="detail-card">
@@ -204,7 +204,7 @@ function App() {
       <section className="section">
         <div className="section-heading">
           <p className="eyebrow">Experience</p>
-          <h2>Real-world support work that builds the judgment behind cloud engineering.</h2>
+          <h2>Real-world operations work that builds the judgment behind cloud infrastructure.</h2>
         </div>
         <div className="timeline-grid">
           {experience.map((item) => (
@@ -256,7 +256,7 @@ function App() {
       <section className="section">
         <div className="section-heading">
           <p className="eyebrow">Certifications</p>
-          <h2>Credentials that support the cloud engineering transition.</h2>
+          <h2>Credentials that support cloud operations and infrastructure automation.</h2>
         </div>
         <div className="grid-compact">
           {certifications.map((certification) => (
@@ -341,8 +341,8 @@ function App() {
       <section className="section section-footer">
         <p className="eyebrow">Portfolio shape</p>
         <p>
-          The site now presents a full cloud engineering story: enterprise IT support, hands-on AWS projects, education,
-          certifications, and direct contact paths.
+          The site now presents the stretch-role story: enterprise IT operations, hands-on AWS/Terraform projects,
+          infrastructure automation, systems analysis, education, certifications, and direct contact paths.
         </p>
       </section>
     </main>
