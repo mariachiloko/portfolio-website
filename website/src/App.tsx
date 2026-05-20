@@ -11,10 +11,10 @@ import {
 function ThemeToggle() {
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window === 'undefined') {
-      return false;
+      return true;
     }
 
-    return window.localStorage.getItem('portfolio-theme') === 'dark';
+    return window.localStorage.getItem('portfolio-theme') !== 'light';
   });
 
   useEffect(() => {
@@ -57,6 +57,7 @@ function App() {
   ] as const;
 
   const [activeExperience, setActiveExperience] = useState(experience[0]);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.dataset.theme = document.documentElement.dataset.theme ?? 'light';
@@ -69,15 +70,27 @@ function App() {
           Miguel Cervantes
         </a>
 
-        <nav className="site-nav" aria-label="Primary">
+        <nav className={menuOpen ? 'site-nav open' : 'site-nav'} aria-label="Primary">
           {navLinks.map(([href, label]) => (
-            <a key={href} href={`#${href}`}>
+            <a key={href} href={`#${href}`} onClick={() => setMenuOpen(false)}>
               {label}
             </a>
           ))}
         </nav>
 
-        <ThemeToggle />
+        <div className="header-actions">
+          <button
+            className="menu-toggle"
+            type="button"
+            aria-label="Toggle navigation menu"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((value) => !value)}
+          >
+            <span />
+            <span />
+          </button>
+          <ThemeToggle />
+        </div>
       </header>
 
       <section className="hero" id="home">
