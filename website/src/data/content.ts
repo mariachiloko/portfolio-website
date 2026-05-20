@@ -43,6 +43,8 @@ export interface CertificationContent {
   name: string;
   issuer?: string;
   status?: string;
+  badge?: string;
+  url?: string;
 }
 
 type JsonModule = {

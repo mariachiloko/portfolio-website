@@ -71,6 +71,8 @@ function App() {
   const githubLink = contactLinks.find((link) => link.label === 'GitHub');
   const linkedinLink = contactLinks.find((link) => link.label === 'LinkedIn');
   const emailLink = contactLinks.find((link) => link.label === 'Email');
+  const featuredCertifications = certifications.filter((certification) => certification.badge);
+  const supportingCertifications = certifications.filter((certification) => !certification.badge);
 
   return (
     <main className="page-shell">
@@ -256,17 +258,43 @@ function App() {
       <section className="section">
         <div className="section-heading">
           <p className="eyebrow">Certifications</p>
-          <h2>Credentials that support cloud operations and infrastructure automation.</h2>
+          <h2>Verified badges first, with supporting credentials underneath.</h2>
         </div>
-        <div className="grid-compact">
-          {certifications.map((certification) => (
-            <article className="detail-card" key={certification.name}>
-              <p className="card-label">{certification.issuer ?? 'Certification'}</p>
-              <h3>{certification.name}</h3>
-              {certification.status ? <p>{certification.status}</p> : null}
+        <div className="cert-grid">
+          {featuredCertifications.map((certification) => (
+            <article className="cert-card" key={certification.name}>
+              <div className="cert-card-media">
+                <img src={certification.badge} alt={`${certification.name} badge`} loading="lazy" />
+              </div>
+              <div className="cert-card-body">
+                <p className="card-label">{certification.issuer ?? 'Certification'}</p>
+                <h3>{certification.name}</h3>
+                {certification.status ? <p>{certification.status}</p> : null}
+                {certification.url ? (
+                  <a className="cert-card-link" href={certification.url} target="_blank" rel="noreferrer">
+                    View badge
+                  </a>
+                ) : null}
+              </div>
             </article>
           ))}
         </div>
+        {supportingCertifications.length ? (
+          <div className="supporting-certs">
+            <p className="card-label">Additional certifications</p>
+            <div className="supporting-cert-list">
+              {supportingCertifications.map((certification) => (
+                <article className="supporting-cert" key={certification.name}>
+                  <h3>{certification.name}</h3>
+                  <p>
+                    {certification.issuer}
+                    {certification.status ? ` · ${certification.status}` : ''}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+        ) : null}
       </section>
 
       <section className="section">
