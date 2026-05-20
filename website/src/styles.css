@@ -206,6 +206,7 @@ img {
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   backdrop-filter: blur(16px);
+  scroll-margin-top: 6rem;
 }
 
 [data-theme='dark'] .site-header,
@@ -458,6 +459,13 @@ img {
   border-color: var(--border-strong);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.78));
   box-shadow: 0 0 0 4px var(--accent-soft), var(--shadow-soft);
+}
+
+[data-theme='dark'] .tab.active {
+  color: var(--text);
+  border-color: rgba(126, 182, 255, 0.45);
+  background: linear-gradient(180deg, rgba(33, 51, 70, 0.98), rgba(23, 36, 52, 0.96));
+  box-shadow: 0 0 0 4px rgba(126, 182, 255, 0.12), 0 10px 24px rgba(0, 0, 0, 0.28);
 }
 
 .experience-panel {
@@ -811,6 +819,7 @@ img {
   .hero,
   .section-card {
     padding: 1.05rem;
+    scroll-margin-top: 5.25rem;
   }
 
   .hero h1 {
