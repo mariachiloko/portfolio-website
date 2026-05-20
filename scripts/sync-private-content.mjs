@@ -3,16 +3,15 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const privateRoot = path.join(repoRoot, 'private-content');
+const privateRootCandidates = [
+  path.resolve(repoRoot, '..', 'portfolio-content', 'private-content'),
+  path.join(repoRoot, 'private-content'),
+];
 const websiteRoot = path.join(repoRoot, 'website');
 
 const targetDataDir = path.join(websiteRoot, 'src', 'data');
 const targetMediaDir = path.join(websiteRoot, 'public', 'media', 'personal');
 const targetResumeDir = path.join(websiteRoot, 'public', 'resume');
-
-const sourceDataDir = path.join(privateRoot, 'data');
-const sourceMediaDir = path.join(privateRoot, 'media', 'personal');
-const sourceResumeDir = path.join(privateRoot, 'resume');
 const publicMediaExtensions = new Set(['.avif', '.gif', '.jpeg', '.jpg', '.png', '.svg', '.webp']);
 
 async function pathExists(targetPath) {
@@ -89,6 +88,18 @@ async function copyTree(sourceDir, targetDir, options = {}) {
 }
 
 async function syncPrivateContent() {
+  let privateRoot = privateRootCandidates[0];
+  for (const candidate of privateRootCandidates) {
+    if (await pathExists(candidate)) {
+      privateRoot = candidate;
+      break;
+    }
+  }
+
+  const sourceDataDir = path.join(privateRoot, 'data');
+  const sourceMediaDir = path.join(privateRoot, 'media', 'personal');
+  const sourceResumeDir = path.join(privateRoot, 'resume');
+
   await mkdir(targetDataDir, { recursive: true });
   await mkdir(targetMediaDir, { recursive: true });
   await mkdir(targetResumeDir, { recursive: true });
