@@ -37,7 +37,6 @@ function ThemeToggle() {
 
 function App() {
   const profilePhoto = profile.photo ?? '/media/placeholders/profile-photo.svg';
-  const resumeLabel = profile.resume?.endsWith('.pdf') ? 'Download resume' : 'Open resume';
   const featuredCertifications = useMemo(
     () => certifications.filter((certification) => certification.badge),
     [],
@@ -97,13 +96,13 @@ function App() {
         <div className="hero-copy">
           <p className="eyebrow">Hello, my name is</p>
           <h1>{profile.name}</h1>
-          <h2>Cloud Engineer</h2>
-          <h3>AWS | Terraform</h3>
+          <h2>Infrastructure Support and Cloud Automation</h2>
+          <h3>Windows, Active Directory, Citrix | AWS/Terraform</h3>
           <p>{profile.summary}</p>
           <div className="hero-metrics" aria-label="Profile highlights">
-            <span>Cloud operations</span>
+            <span>Windows support</span>
+            <span>Active Directory + Citrix</span>
             <span>AWS + Terraform</span>
-            <span>Identity and endpoint support</span>
           </div>
         </div>
 
@@ -113,19 +112,20 @@ function App() {
       </section>
 
       <section className="about section-card" id="about">
-        <h2>About Me</h2>
+        <h2>Summary</h2>
 
         <div className="about-layout">
           <div className="about-copy">
             <p>
-              Infrastructure-focused IT professional with enterprise operations experience and hands-on AWS and
-              Terraform projects across networking, IAM/OIDC, serverless, CDN, DNS, and deployment automation.
-              I work at the intersection of production support, infrastructure automation, identity and endpoint
-              operations, and systems analysis.
+              Support-first IT professional with enterprise experience across Windows endpoints, Active Directory,
+              Citrix, networking, printing, and Microsoft 365, plus hands-on AWS and Terraform projects. I focus on
+              troubleshooting, repeatable operations, secure access, and practical infrastructure work that also
+              builds a path toward cloud engineering.
             </p>
             <p>
-              Alongside day-to-day support, I focus on repeatable delivery, clear documentation, and practical
-              improvements that make operations easier to run and explain.
+              I am targeting systems administration and infrastructure support roles now while continuing to build
+              cloud fundamentals through AWS, Terraform, GitHub Actions, IAM/OIDC, S3, CloudFront, Route 53, Lambda,
+              and DynamoDB.
             </p>
 
             <p className="subheading">Core skills</p>
@@ -195,7 +195,7 @@ function App() {
       </section>
 
       <section className="section-card" id="projects">
-        <h2>Projects</h2>
+        <h2>Selected Work</h2>
 
         <div className="project-list">
           {projects.map((project, index) => (
@@ -253,8 +253,8 @@ function App() {
       <section className="section-card" id="contact">
         <h2>Contact</h2>
         <p className="contact-copy">
-          Based in the Chicago area and open to cloud platform, infrastructure, and cloud operations engineering
-          opportunities.
+          Based in the Chicago area and open to systems administration, infrastructure support, cloud support, and
+          cloud infrastructure opportunities.
         </p>
 
         <div className="contact-links">

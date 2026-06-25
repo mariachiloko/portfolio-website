@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">Miguel Cervantes Cloud Operations Portfolio</title>
-  <desc id="desc">A social preview card for Miguel Cervantes, focused on cloud operations, AWS, Terraform, and infrastructure automation.</desc>
+  <title id="title">Miguel Cervantes Infrastructure Support and Cloud Automation</title>
+  <desc id="desc">A social preview card for Miguel Cervantes, focused on Windows support, Active Directory, Citrix, networking, AWS, Terraform, and infrastructure automation.</desc>
   <defs>
     <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
       <stop offset="0%" stop-color="#103f3a" />
@@ -38,19 +38,19 @@
   <rect x="88" y="84" width="1024" height="462" rx="28" fill="none" stroke="#d9fff4" stroke-opacity="0.14" />
 
   <text x="112" y="152" fill="#86f7dc" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="7">
-    CLOUD OPERATIONS PORTFOLIO
+    INFRASTRUCTURE SUPPORT + CLOUD AUTOMATION
   </text>
   <text x="112" y="258" fill="#f6fbff" font-family="Georgia, 'Times New Roman', serif" font-size="78" font-weight="700">
     Miguel Cervantes
   </text>
   <text x="116" y="322" fill="#f6fbff" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700">
-    AWS + Terraform + Infrastructure Automation
+    Windows, Active Directory, Citrix, AWS, and Terraform
   </text>
   <text x="116" y="382" fill="#c7d2e4" font-family="Arial, Helvetica, sans-serif" font-size="30">
-    Cloud operations, systems analysis, identity and endpoint operations,
+    Infrastructure support first, with cloud fundamentals for the long term.
   </text>
   <text x="116" y="426" fill="#c7d2e4" font-family="Arial, Helvetica, sans-serif" font-size="30">
-    secure deployments, and production support.
+    Troubleshooting, repeatable operations, and practical AWS work.
   </text>
 
   <g transform="translate(116 480)">

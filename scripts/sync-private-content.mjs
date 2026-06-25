@@ -4,8 +4,8 @@ import { fileURLToPath } from 'node:url';
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const privateRootCandidates = [
-  path.resolve(repoRoot, '..', 'portfolio-content', 'private-content'),
   path.join(repoRoot, 'private-content'),
+  path.resolve(repoRoot, '..', 'portfolio-content', 'private-content'),
 ];
 const websiteRoot = path.join(repoRoot, 'website');
 
