@@ -8,6 +8,14 @@ import {
   projects,
 } from './data/content';
 
+function getCurrentPathname() {
+  if (typeof window === 'undefined') {
+    return '/';
+  }
+
+  return window.location.pathname.replace(/\/+$/, '') || '/';
+}
+
 function ThemeToggle() {
   const [darkMode, setDarkMode] = useState(() => {
     if (typeof window === 'undefined') {
@@ -35,7 +43,18 @@ function ThemeToggle() {
   );
 }
 
-function App() {
+function SiteFooter() {
+  return (
+    <footer className="site-footer">
+      <p>© 2026 Miguel Cervantes All rights reserved</p>
+      <p>
+        Made with <span aria-hidden="true">♥</span> and React
+      </p>
+    </footer>
+  );
+}
+
+function HomePage() {
   const profilePhoto = profile.photo ?? '/media/placeholders/profile-photo.svg';
   const featuredCertifications = useMemo(
     () => certifications.filter((certification) => certification.badge),
@@ -47,23 +66,19 @@ function App() {
   );
 
   const navLinks = [
-    ['about', 'about'],
-    ['experience', 'experience'],
-    ['education', 'education'],
-    ['projects', 'projects'],
-    ['achievements', 'achievements'],
-    ['contact', 'contact'],
+    ['/about/', 'about'],
+    ['#experience', 'experience'],
+    ['#education', 'education'],
+    ['#projects', 'projects'],
+    ['#achievements', 'achievements'],
+    ['#contact', 'contact'],
   ] as const;
 
   const [activeExperience, setActiveExperience] = useState(experience[0]);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => {
-    document.documentElement.dataset.theme = document.documentElement.dataset.theme ?? 'light';
-  }, []);
-
   return (
-    <main className="page">
+    <>
       <header className="site-header">
         <a className="brand" href="#home">
           Miguel Cervantes
@@ -71,7 +86,7 @@ function App() {
 
         <nav className={menuOpen ? 'site-nav open' : 'site-nav'} aria-label="Primary">
           {navLinks.map(([href, label]) => (
-            <a key={href} href={`#${href}`} onClick={() => setMenuOpen(false)}>
+            <a key={href} href={href} onClick={() => setMenuOpen(false)}>
               {label}
             </a>
           ))}
@@ -97,12 +112,12 @@ function App() {
           <p className="eyebrow">Hello, my name is</p>
           <h1>{profile.name}</h1>
           <h2>{profile.role}</h2>
-          <h3>Enterprise IT • Hybrid Microsoft • AWS • Terraform • Automation • AI</h3>
+          <h3>Windows • Active Directory • Microsoft 365 • Citrix • Networking • VMware</h3>
           <p>{profile.summary}</p>
           <div className="hero-metrics" aria-label="Profile highlights">
-            <span>Hybrid Microsoft</span>
-            <span>AWS + Terraform</span>
-            <span>Automation + AI</span>
+            <span>Windows Support</span>
+            <span>AD + M365</span>
+            <span>Networking + Citrix</span>
           </div>
         </div>
 
@@ -266,18 +281,160 @@ function App() {
         </div>
       </section>
 
-      <footer className="site-footer">
-        <p>© 2026 Miguel Cervantes All rights reserved</p>
-        <p>
-          Made with <span aria-hidden="true">♥</span> and React
+      <SiteFooter />
+
+      <div className="content-source">
+        {contentSource.profile === 'local' ? 'Private content active' : 'Example content active'}
+      </div>
+    </>
+  );
+}
+
+function AboutPage() {
+  const resumeLink = profile.resume ?? '/resume/miguel-cervantes-resume.html';
+  const storyParagraphs = [
+    'I grew up in a family of mariachi musicians, so music has always been part of my life. That background first led me into music education, but while helping grow our family business I became interested in how marketing, audio production, and websites could help us reach more people. As I worked on those projects, I found that I enjoyed the technical side just as much as the creative side.',
+    'I started learning how to build and troubleshoot websites, audio setups, and everyday devices, and I naturally became the person people came to when something was not working. In school, that often meant helping teachers with their computers. Over time, that interest turned into a real career direction.',
+    'During my master’s program in music, I took a step back and thought carefully about what I wanted to do next. My degree was in music, but I realized I wanted a new challenge and a long-term career in technology. I earned my first certification, landed my first IT role, and grew from help desk into broader support responsibilities.',
+    'Today, I focus on systems administration and infrastructure support in enterprise environments. My work centers on Windows endpoints, Active Directory, Microsoft 365, Exchange, Citrix, printers, networking, and VMware, with AWS and Terraform continuing to grow as practical skills I apply through real projects. Music is still part of my life, but technology is now my primary career path.',
+  ];
+
+  const competencyBlocks = [
+    {
+      title: 'Windows, Identity, and Messaging',
+      items: ['Windows 10/11', 'Active Directory', 'Microsoft 365', 'Exchange', 'Entra ID', 'Intune', 'MFA'],
+    },
+    {
+      title: 'Networking and Access',
+      items: ['DNS', 'DHCP', 'TCP/IP', 'VLANs', 'VPNs', 'Citrix'],
+    },
+    {
+      title: 'Endpoints and Printing',
+      items: ['Endpoint support', 'Imaging', 'Enterprise printing', 'Zebra printers', 'KACE', 'Device compliance'],
+    },
+    {
+      title: 'Cloud and Automation',
+      items: ['AWS', 'Terraform', 'PowerShell', 'Git/GitHub', 'Secure deployments', 'Documentation'],
+    },
+  ];
+
+  return (
+    <main className="page about-page">
+      <header className="about-header">
+        <a className="about-back" href="/">
+          ← Back to Home
+        </a>
+        <ThemeToggle />
+      </header>
+
+      <section className="section-card about-hero">
+        <p className="eyebrow">About Me.</p>
+        <h1>The path behind the work</h1>
+        <p className="about-lede">
+          Support-first systems work shaped by music, troubleshooting, and practical infrastructure ownership.
         </p>
-      </footer>
+
+        <div className="about-story">
+          {storyParagraphs.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-card">
+        <h2>Core Competencies</h2>
+        <p className="section-intro">The tools and environments I use to solve problems daily.</p>
+
+        <div className="about-competency-grid">
+          {competencyBlocks.map((block) => (
+            <article className="about-competency-card" key={block.title}>
+              <h3>{block.title}</h3>
+              <ul className="about-list">
+                {block.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-card">
+        <h2>Education & Certifications</h2>
+        <p className="section-intro">Proof of the path I have built across music, support, and infrastructure.</p>
+
+        <div className="about-credential-grid">
+          <div>
+            <p className="subheading">Education</p>
+            <div className="stack-grid">
+              {education.map((item) => (
+                <article className="stack-card" key={`${item.school}-${item.degree}`}>
+                  <p className="stack-date">{item.dates}</p>
+                  <h3>{item.degree}</h3>
+                  <p>{item.school}</p>
+                  {item.details?.length ? (
+                    <ul className="stack-details">
+                      {item.details.map((detail) => (
+                        <li key={detail}>{detail}</li>
+                      ))}
+                    </ul>
+                  ) : null}
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="subheading">Certifications</p>
+            <div className="supporting-certifications about-certifications">
+              {certifications.map((certification) => (
+                <article className="supporting-certification" key={certification.name}>
+                  <h3>{certification.name}</h3>
+                  <p>
+                    {certification.issuer}
+                    {certification.status ? ` • ${certification.status}` : ''}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-card">
+        <h2>Let&apos;s Connect</h2>
+        <p className="contact-copy">
+          If you are looking for someone who can support users, troubleshoot systems, and keep infrastructure moving,
+          I would love to connect.
+        </p>
+
+        <div className="contact-links">
+          <a href={resumeLink}>resume</a>
+          {profile.links.map((link) => (
+            <a key={link.label} href={link.href} target="_blank" rel="noreferrer">
+              {link.label.toLowerCase()}
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <SiteFooter />
 
       <div className="content-source">
         {contentSource.profile === 'local' ? 'Private content active' : 'Example content active'}
       </div>
     </main>
   );
+}
+
+function App() {
+  useEffect(() => {
+    document.documentElement.dataset.theme = document.documentElement.dataset.theme ?? 'light';
+    document.title =
+      getCurrentPathname() === '/about' ? 'About Miguel Cervantes' : 'Miguel Cervantes | Systems Administrator & Infrastructure Engineer';
+  }, []);
+
+  return getCurrentPathname() === '/about' ? <AboutPage /> : <main className="page"><HomePage /></main>;
 }
 
 export default App;

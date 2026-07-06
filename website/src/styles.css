@@ -99,6 +99,34 @@ img {
   padding: 0.65rem 0 3rem;
 }
 
+.about-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  padding-top: 0.65rem;
+}
+
+.about-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0.25rem 0.15rem;
+}
+
+.about-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: var(--subtle);
+}
+
+.about-back:hover {
+  color: var(--accent);
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -437,6 +465,83 @@ img {
   margin-top: 0.15rem;
 }
 
+.about-hero {
+  display: grid;
+  gap: 1rem;
+}
+
+.about-hero h1 {
+  margin: 0;
+  max-width: 12ch;
+  font-family: var(--font-accent);
+  font-size: clamp(2.75rem, 5.8vw, 4.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+}
+
+.about-lede {
+  margin: 0;
+  max-width: 54ch;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.about-story {
+  display: grid;
+  gap: 0.95rem;
+  max-width: 68ch;
+}
+
+.about-story p {
+  margin: 0;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+.section-intro {
+  margin: -0.35rem 0 1rem;
+  max-width: 60ch;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.about-competency-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.about-competency-card {
+  padding: 1rem 1rem 0.95rem;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.48);
+  box-shadow: var(--shadow-soft);
+}
+
+.about-competency-card h3 {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-accent);
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+}
+
+.about-credential-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.about-certifications {
+  margin-top: 0.1rem;
+}
+
+.about-page .contact-links {
+  margin-top: 0.95rem;
+}
+
 .tab-bar {
   display: flex;
   flex-wrap: wrap;
@@ -715,6 +820,11 @@ img {
 }
 
 @media (max-width: 920px) {
+  .about-competency-grid,
+  .about-credential-grid {
+    grid-template-columns: 1fr;
+  }
+
   .hero,
   .about-layout,
   .project-list,
@@ -832,5 +942,9 @@ img {
 
   .project-row-head {
     flex-direction: column;
+  }
+
+  .about-header {
+    padding-top: 0.35rem;
   }
 }
