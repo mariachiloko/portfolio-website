@@ -210,17 +210,29 @@ function HomePage() {
       </section>
 
       <section className="section-card" id="projects">
-        <h2>Selected Work</h2>
+        <h2>Featured</h2>
 
         <div className="project-list">
-          {projects.map((project, index) => (
+          <a className="project-row" href={profile.resume ?? '/resume/miguel-cervantes-resume.pdf'}>
+            <div className="project-row-head">
+              <div>
+                <div className="project-meta">Resume PDF</div>
+                <h3>Systems Administrator Resume</h3>
+              </div>
+              <span className="coming-soon">download</span>
+            </div>
+            <p>Download the resume recruiters should read first.</p>
+            <p className="project-outcome">Support-first systems, identity, networking, and infrastructure experience.</p>
+          </a>
+
+          {projects.slice(0, 2).map((project) => (
             <article className="project-row" key={project.title}>
               <div className="project-row-head">
                 <div>
                   <div className="project-meta">{project.stack.slice(0, 4).join('  ')}</div>
                   <h3>{project.title}</h3>
                 </div>
-                {index < 3 ? <span className="coming-soon">coming soon</span> : null}
+                <span className="coming-soon">featured</span>
               </div>
               <p>{project.summary}</p>
               <p className="project-outcome">{project.outcome}</p>
@@ -291,7 +303,7 @@ function HomePage() {
 }
 
 function AboutPage() {
-  const resumeLink = profile.resume ?? '/resume/miguel-cervantes-resume.html';
+  const resumeLink = profile.resume ?? '/resume/miguel-cervantes-resume.pdf';
   const storyParagraphs = [
     'I grew up in a family of mariachi musicians, so music has always been part of my life. That background first led me into music education, but while helping grow our family business I became interested in how marketing, audio production, and websites could help us reach more people. As I worked on those projects, I found that I enjoyed the technical side just as much as the creative side.',
     'I started learning how to build and troubleshoot websites, audio setups, and everyday devices, and I naturally became the person people came to when something was not working. In school, that often meant helping teachers with their computers. Over time, that interest turned into a real career direction.',
